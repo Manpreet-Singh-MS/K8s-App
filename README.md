@@ -1,1 +1,1 @@
-##K8s-App with ArgoCD & DataDog##
+## K8s-App with ArgoCD & DataDog ##
