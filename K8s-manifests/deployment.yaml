@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-nginx
+  labels:
+    app: sample-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sample-nginx
+  template:
+    metadata:
+      labels:
+        app: sample-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_ENV
+              value: minikube
+            - name: DD_SERVICE
+              value: sample-nginx
+            - name: DD_VERSION
+              value: 1.0.0
